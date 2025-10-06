@@ -1,26 +1,27 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ------------------- */
+  /* LIGHT THEME COLORS */
+  /* ------------------- */
+  
+  /* Primary Text & Background */
+  --color-text-primary: #1a1a1a;        /* Very Dark Gray (for main text) */
+  --color-background-light: #ffffff;    /* Pure White (for page background) */
+  --color-background-medium: #f8f8f8;   /* Off-White (for card/section background) */
+  --color-border: #e0e0e0;              /* Light Gray (for dividers/borders) */
+  
+  /* ACCENT COLOR: Dark Blue */
+  --color-accent-blue-dark: #004d99;    /* Your main Dark Blue */
+  --color-accent-blue-light: #e6f0fa;   /* Very Light Blue (for hover/background fill) */
+  --color-accent-blue-hover: #003a73;   /* Slightly darker blue (for button hover) */
+  
+  /* Other Colors (Optional) */
+  --color-text-secondary: #606060;      /* Medium Gray (for secondary text/captions) */
+  --color-success: #28a745;             /* Green for success messages */
+  --color-error: #dc3545;               /* Red for errors */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Apply the variables globally */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background-light);
+  color: var(--color-text-primary);
 }
