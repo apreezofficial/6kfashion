@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
     const play = async () => {
       await controls.start("open");
       // Optional chime sound
-      const audio = new Audio("/sounds/welcome.mp3");
+      const audio = new Audio("https://tim-academy.pxxl.pro/sounds/welcome.mp3");
       audio.play().catch(() => {});
     };
     play();
