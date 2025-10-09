@@ -1,131 +1,134 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-// Define the navigation links
 const navLinks = [
-  { name: 'Programs', href: '#programs' },
-  { name: 'Alumni Success', href: '#alumni' },
-  { name: 'Academy Difference', href: '#difference' },
-  // Add more links as you build the page
+  { name: "Programs", href: "#programs" },
+  { name: "Alumni Success", href: "#alumni" },
+  { name: "Our Difference", href: "#difference" },
 ];
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Function to close the menu after a link is clicked
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
-
   return (
-    // Fixed container at the top
-    <nav className="
-      fixed top-0 left-0 w-full 
-      bg-page-bg/95 backdrop-blur-sm z-50 
-      shadow-md 
-      transition-all duration-300
-    ">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <nav
+      className="
+        fixed top-0 left-0 w-full z-50 
+        bg-white/80 backdrop-blur-lg 
+        shadow-md transition-all duration-300
+      "
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="flex justify-between items-center h-16">
-          
-          {/* Logo/Brand Name */}
-          <a href="#hero" className="flex-shrink-0 text-2xl font-extrabold text-accent-blue hover:text-accent-blue-dark">
-            Tim Fashion Academy
+          {/* Logo */}
+          <a
+            href="#hero"
+            className="text-2xl md:text-3xl font-extrabold tracking-tight 
+                       text-blue-700 hover:text-blue-800 transition-colors"
+          >
+            Tim<span className="text-blue-500"> Fashion</span> Academy
           </a>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a 
+              <a
                 key={link.name}
                 href={link.href}
                 className="
-                  text-text-primary 
-                  font-medium 
-                  hover:text-accent-blue 
-                  transition duration-150 
-                  relative 
-                  group
+                  relative text-gray-700 hover:text-blue-600 font-medium 
+                  transition-colors group
                 "
               >
                 {link.name}
-                {/* Underline effect on hover */}
-                <span className="
-                  absolute bottom-0 left-0 h-[2px] 
-                  bg-accent-blue w-0 
-                  group-hover:w-full 
-                  transition-all duration-300
-                "></span>
+                <span
+                  className="
+                    absolute bottom-0 left-0 w-0 h-[2px] 
+                    bg-blue-500 group-hover:w-full transition-all duration-300
+                  "
+                ></span>
               </a>
             ))}
-            
-            {/* Primary CTA Button */}
-            <a 
-              href="#application" 
+
+            <a
+              href="#application"
               className="
-                ml-4 
-                bg-accent-blue 
-                hover:bg-accent-blue-dark 
-                text-white 
-                font-bold 
-                py-2 px-6 
-                rounded-lg 
-                transition duration-200
+                ml-4 bg-blue-600 hover:bg-blue-700 
+                text-white font-semibold 
+                py-2 px-6 rounded-full 
+                shadow-sm transition duration-200
               "
             >
               Enroll Now
             </a>
           </div>
 
-          {/* Mobile Menu Button (Hamburger) */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            type="button"
-            className="md:hidden text-accent-blue hover:text-accent-blue-dark focus:outline-none"
-            aria-expanded={isOpen}
+            className="md:hidden text-blue-700 hover:text-blue-800 transition"
             aria-label="Toggle navigation"
           >
-            {/* SVG for Hamburger/Close Icon */}
             {isOpen ? (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Content */}
-      <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} transition-all duration-330`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden ${
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        } overflow-hidden transition-all duration-300 bg-white/90 backdrop-blur-lg shadow-md`}
+      >
+        <div className="px-6 py-4 space-y-3">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              onClick={handleLinkClick}
+              onClick={() => setIsOpen(false)}
               className="
-                block px-3 py-2 rounded-md 
-                text-base font-medium 
-                text-text-primary 
-                hover:bg-accent-blue-light hover:text-accent-blue
+                block text-gray-700 font-medium 
+                hover:text-blue-600 transition
               "
             >
               {link.name}
             </a>
           ))}
-          {/* Mobile CTA */}
-          <a 
+          <a
             href="#application"
-            onClick={handleLinkClick}
+            onClick={() => setIsOpen(false)}
             className="
-              block px-3 py-2 mt-2 rounded-md 
-              text-base font-medium text-center
-              bg-accent-blue text-white 
-              hover:bg-accent-blue-dark 
-              transition duration-200
+              block mt-2 text-center 
+              bg-blue-600 hover:bg-blue-700 
+              text-white font-semibold py-2 rounded-full
+              transition
             "
           >
             Enroll Now
