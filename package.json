@@ -13,7 +13,8 @@
     "react-dom": "19.1.0",
     "next": "15.5.4",
     "framer-motion": "^11.0.0",
-"react-parallax-tilt": "^1.7.157"
+"react-parallax-tilt": "^1.7.157",
+  "lucide-react": "^0.468.0"
   },
   "devDependencies": {
     "typescript": "^5",
