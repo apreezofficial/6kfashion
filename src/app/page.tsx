@@ -2,8 +2,8 @@ import Image from "next/image";
 import Hero from './HeroMain';
 import NavBar from './NavBar';
 import AcademicDifference from './AcademyDifference';
-import CraftSection from "CraftSection"; 
-import MentorsSection from "MentorsSection"; 
+import CraftSection from "./CraftSection"; 
+import MentorsSection from "./MentorsSection"; 
 export default function Home() {
     return (
     <>
