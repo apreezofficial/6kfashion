@@ -3,7 +3,8 @@ import Hero from './HeroMain';
 import NavBar from './NavBar';
 import AcademicDifference from './AcademyDifference';
 import CraftSection from "CraftSection"; 
-return (
+export default function Home() {
+    return (
     <>
     <NavBar />
     <Hero />
