@@ -28,10 +28,9 @@ const courses = [
 
 export default function CoursesSection() {
   return (
-    <section className="relative py-28 bg-gradient-to-b from-white via-blue-50 to-blue-100 dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-950 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,transparent_70%)]" />
-
+<section className="relative py-28 bg-gradient-to-b from-white via-blue-50 to-blue-100 overflow-hidden">
+      {/* ✨ Subtle blue glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)] pointer-events-none" />
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
@@ -48,7 +47,7 @@ export default function CoursesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-16"
+          className="text-center text-gray-900 dark:text-gray-300 max-w-2xl mx-auto mb-16"
         >
           Empower your creativity with structured, skill-based programs designed to elevate your fashion journey.
         </motion.p>
