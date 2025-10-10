@@ -123,7 +123,7 @@ const NavBar: React.FC = () => {
             </a>
           ))}
           <a
-            href="#application"
+            href="#contact"
             onClick={() => setIsOpen(false)}
             className="
               block mt-2 text-center 
