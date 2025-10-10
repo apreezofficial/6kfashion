@@ -5,12 +5,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 const galleryImages = [
-  { src: "/images/gallery1.jpg", alt: "Tailoring class" },
-  { src: "/images/gallery2.jpg", alt: "Design session" },
-  { src: "/images/gallery3.jpg", alt: "Student creation" },
-  { src: "/images/gallery4.jpg", alt: "Fashion runway" },
-  { src: "/images/gallery5.jpg", alt: "Workshop in progress" },
-  { src: "/images/gallery6.jpg", alt: "Cutting and sewing" },
+  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF4-1cJfBKZN3BQEcvbB-82fH5hCPDaJ9qdL5viAXB9w&s=10", alt: "Tailoring class" },
+  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj5H_2rsHkkG7vBiUclcuVNj89csy6nEZ5wtbg-dp5hg&s=10", alt: "Design session" },
+  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0eAB_xEnRB2TZBrtcX5LjwZUKiNcRMnX4mhjLKkKKvQ&s=10", alt: "Student creation" },
+  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKGXMghmOyYEQ1mkzp72h7njg7dlPX29TDSelClTd4aw&s=10", alt: "Fashion runway" },
+  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Mi4MT9Y9dcYJfrIovOqXFrcgkv5nCsBOB4cR2QFBiw&s=10", alt: "Workshop in progress" },
+  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb70N8RTNFkjQ3y9HxU5g0c9iGgdv1xgu_RVoNGc5cPQ&s=10", alt: "Cutting and sewing" },
 ];
 
 export default function GallerySection() {
