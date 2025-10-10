@@ -3,14 +3,7 @@
 import { motion } from "framer-motion";
 
 export default function CTASection() {
-  // Smooth scroll to contact section
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
+  
   return (
     <section className="relative py-28 bg-gradient-to-b from-blue-600 via-blue-700 to-blue-800 text-white text-center overflow-hidden">
       {/* Subtle glowing orbs */}
@@ -40,10 +33,9 @@ export default function CTASection() {
         <motion.button
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.96 }}
-          onClick={scrollToContact}
           className="bg-white text-blue-700 font-semibold py-4 px-10 rounded-full shadow-xl hover:bg-blue-50 transition-all duration-300"
         >
-          Get In Touch
+          <a href="#contact" >Get In Touch</a>
         </motion.button>
 
         {/* Subtle wave motion under button */}
