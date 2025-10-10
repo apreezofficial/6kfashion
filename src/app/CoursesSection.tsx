@@ -37,7 +37,7 @@ export default function CoursesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-extrabold text-center text-blue-700 dark:text-blue-400 mb-6"
+          className="text-4xl md:text-5xl font-extrabold text-center text-blue-700 mb-6"
         >
           Courses <span className="text-blue-500">We Offer</span>
         </motion.h2>
@@ -47,7 +47,7 @@ export default function CoursesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center text-gray-900 dark:text-gray-300 max-w-2xl mx-auto mb-16"
+          className="text-center text-gray-900 max-w-2xl mx-auto mb-16"
         >
           Empower your creativity with structured, skill-based programs designed to elevate your fashion journey.
         </motion.p>
@@ -62,12 +62,12 @@ export default function CoursesSection() {
                 viewport={{ once: true }}
                 className="group relative bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 rounded-3xl p-[2px] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all"
               >
-                <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 h-full flex flex-col items-center text-center space-y-4">
+                <div className="bg-white rounded-3xl p-8 h-full flex flex-col items-center text-center space-y-4">
                   <span className="text-5xl">{course.icon}</span>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-bold text-gray-900">
                     {course.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">{course.desc}</p>
+                  <p className="text-gray-600">{course.desc}</p>
 
                   {/* Hover overlay glow */}
                   <motion.div
