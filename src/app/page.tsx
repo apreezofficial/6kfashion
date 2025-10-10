@@ -9,6 +9,7 @@ import CoursesSection from "./CoursesSection";
 import GallerySection from "./GallerySection";
 import CTASection from "./CtaSection";
 import ContactSection from "./ContactSection";
+import Footer from "./Footer";
 export default function Home() {
     return (
     <>
@@ -22,6 +23,7 @@ export default function Home() {
         <GallerySection />
         <CTASection />
         <ContactSection />
+        <Footer />
     </>
   );
 }
