@@ -51,7 +51,7 @@ const NavBar: React.FC = () => {
             ))}
 
             <a
-              href="#application"
+              href="#contact"
               className="
                 ml-4 bg-blue-600 hover:bg-blue-700 
                 text-white font-semibold 
