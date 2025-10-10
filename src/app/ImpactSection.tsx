@@ -31,7 +31,7 @@ export default function ImpactSection() {
   }, []);
 
   return (
-    <section className="relative py-28 bg-gradient-to-b from-white via-blue-50 to-blue-100 dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-950 overflow-hidden">
+    <section className="relative py-28 bg-gradient-to-b from-white via-blue-50 to-blue-100 overflow-hidden">
       {/* Floating blue orbs */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-blue-400/10 blur-3xl rounded-full animate-pulse" />
       <div className="absolute bottom-10 right-20 w-52 h-52 bg-blue-500/10 blur-3xl rounded-full animate-pulse" />
@@ -51,7 +51,7 @@ export default function ImpactSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 1 }}
-          className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-16"
+          className="text-lg text-gray-600 max-w-2xl mx-auto mb-16"
         >
           From zero to brilliance — we’ve empowered hundreds of creators, designers, and innovators to craft their future.
         </motion.p>
@@ -64,18 +64,18 @@ export default function ImpactSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.2, duration: 0.8 }}
                 viewport={{ once: true }}
-                className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-xl border border-blue-200 dark:border-blue-800 rounded-2xl shadow-lg p-10 transform transition-all hover:-translate-y-2"
+                className="relative bg-white/70 backdrop-blur-xl border border-blue-200 dark:border-blue-800 rounded-2xl shadow-lg p-10 transform transition-all hover:-translate-y-2"
               >
                 {/* Spinner Coil Animation */}
                 <motion.div
                   className="absolute top-4 right-4 w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin-slow"
                 />
 
-                <h3 className="text-4xl md:text-5xl font-extrabold text-blue-600 dark:text-blue-400 mb-3">
+                <h3 className="text-4xl md:text-5xl font-extrabold text-blue-600 mb-3">
                   {Math.floor(counters[i]).toLocaleString()}
                   {item.label.includes("%") ? "%" : "+"}
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 text-lg font-medium">
+                <p className="text-gray-700 text-lg font-medium">
                   {item.label}
                 </p>
               </motion.div>
