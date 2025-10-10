@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
           creativity from Nigeria’s leading instructors.
         </p>
         <a
-          href="#application"
+          href="#contact"
           className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-full shadow-xl transition duration-300 hover:scale-105"
         >
           Begin Your Journey
