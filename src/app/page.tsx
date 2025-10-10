@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import AcademicDifference from './AcademyDifference';
 import CraftSection from "./CraftSection"; 
 import MentorsSection from "./MentorsSection"; 
+import ImpactSection from. "./ImpactSection";
 export default function Home() {
     return (
     <>
@@ -12,6 +13,7 @@ export default function Home() {
 <AcademicDifference />
 <CraftSection />
         <MentorsSection />
+    <ImpactSection />
     </>
   );
 }
