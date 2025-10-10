@@ -6,6 +6,7 @@ import CraftSection from "./CraftSection";
 import MentorsSection from "./MentorsSection"; 
 import ImpactSection from "./ImpactSection";
 import CoursesSection from "./CoursesSection";
+import GallerySection from "./GallerySection";
 export default function Home() {
     return (
     <>
@@ -16,6 +17,7 @@ export default function Home() {
         <MentorsSection />
     <ImpactSection />
         <CoursesSection />
+        <GallerySection />
     </>
   );
 }
