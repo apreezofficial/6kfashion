@@ -7,20 +7,18 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     const playCurtain = async () => {
-      // Play whoosh first
-      const whoosh = new Audio("https://tim-academy.pxxl.pro/sounds/curtain-whoosh.mp3");
-      whoosh.volume = 0.6;
-      whoosh.play().catch(() => {});
+      try {
+        const audio = new Audio("https://tim-academy.pxxl.pro/sounds/welcome.mp3");
+        audio.volume = 0.7;
+        // Small delay before playing for sync
+        setTimeout(() => audio.play().catch(() => {}), 200);
 
-      // Open curtain animation
-      await controls.start("open");
-
-      // Then play chime
-      const chime = new Audio("https://tim-academy.pxxl.pro/sounds/welcome.mp3");
-      chime.volume = 0.4;
-      chime.play().catch(() => {});
+        // Start curtain animation
+        await controls.start("open");
+      } catch (err) {
+        console.error("Audio playback error:", err);
+      }
     };
-
     playCurtain();
   }, [controls]);
 
@@ -30,63 +28,77 @@ const Hero: React.FC = () => {
       className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden 
       bg-gradient-to-br from-blue-50 via-white to-blue-100 text-center"
     >
-      {/* 🌈 Ambient shimmer light */}
+      {/* 🌈 Ambient glow pulse */}
       <motion.div
-        animate={{ opacity: [0.2, 0.6, 0.3] }}
+        animate={{ opacity: [0.25, 0.5, 0.25], scale: [1, 1.05, 1] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.12)_0%,transparent_80%)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15)_0%,transparent_80%)]"
       />
 
       {/* 🎭 Left Curtain */}
       <motion.div
-        initial={{ x: 0 }}
+        initial={{ x: 0, skewX: 0 }}
         animate={controls}
         variants={{
           open: {
-            x: "-120%",
-            transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] },
+            x: "-105%",
+            skewX: -4,
+            transition: {
+              duration: 0.9,
+              ease: [0.77, 0, 0.175, 1],
+            },
           },
         }}
         className="absolute top-0 left-0 w-1/2 h-full z-30 
-        bg-gradient-to-r from-blue-900 via-blue-700 to-blue-600
-        shadow-[inset_-12px_0_25px_rgba(0,0,0,0.3)]
-        [mask-image:radial-gradient(circle_at_left_center,black_70%,transparent_100%)]
-        animate-curtainWave"
-      />
+        bg-[linear-gradient(100deg,#002b64_0%,#004ba0_50%,#003a80_100%)]
+        shadow-[inset_-10px_0_25px_rgba(0,0,0,0.4)]
+        [mask-image:radial-gradient(circle_at_center,black_80%,transparent_100%)]
+        overflow-hidden"
+      >
+        {/* 💫 Curtain folds / ripples */}
+        <motion.div
+          animate={{ x: ["0%", "-2%", "0%"], skewY: [0, 3, 0] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="absolute inset-0 bg-[linear-gradient(to-right,rgba(255,255,255,0.1)_10%,transparent_50%,rgba(255,255,255,0.1)_90%)] mix-blend-overlay"
+        />
+      </motion.div>
 
       {/* 🎭 Right Curtain */}
       <motion.div
-        initial={{ x: 0 }}
+        initial={{ x: 0, skewX: 0 }}
         animate={controls}
         variants={{
           open: {
-            x: "120%",
-            transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] },
+            x: "105%",
+            skewX: 4,
+            transition: {
+              duration: 0.9,
+              ease: [0.77, 0, 0.175, 1],
+            },
           },
         }}
         className="absolute top-0 right-0 w-1/2 h-full z-30 
-        bg-gradient-to-l from-blue-900 via-blue-700 to-blue-600
-        shadow-[inset_12px_0_25px_rgba(0,0,0,0.3)]
-        [mask-image:radial-gradient(circle_at_right_center,black_70%,transparent_100%)]
-        animate-curtainWave"
-      />
+        bg-[linear-gradient(260deg,#002b64_0%,#004ba0_50%,#003a80_100%)]
+        shadow-[inset_10px_0_25px_rgba(0,0,0,0.4)]
+        [mask-image:radial-gradient(circle_at_center,black_80%,transparent_100%)]
+        overflow-hidden"
+      >
+        {/* 💫 Curtain folds / ripples */}
+        <motion.div
+          animate={{ x: ["0%", "2%", "0%"], skewY: [0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="absolute inset-0 bg-[linear-gradient(to-left,rgba(255,255,255,0.1)_10%,transparent_50%,rgba(255,255,255,0.1)_90%)] mix-blend-overlay"
+        />
+      </motion.div>
 
-      {/* ✨ Sparkle effect after reveal */}
+      {/* ✨ Hero Text */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: [0, 1, 0], scale: [1, 1.3, 1] }}
-        transition={{ delay: 1.4, duration: 1.2 }}
-        className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.4)_0%,transparent_60%)] z-20 pointer-events-none"
-      />
-
-      {/* 🪩 Hero Text */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9, y: 30 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.7, ease: "easeOut" }}
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
         className="relative z-20 max-w-3xl px-6"
       >
-        <h1 className="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight mb-4 drop-shadow-sm">
+        <h1 className="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight mb-4 drop-shadow">
           Where Style Meets Skill.
         </h1>
         <p className="text-gray-600 md:text-lg mb-8">
@@ -102,23 +114,12 @@ const Hero: React.FC = () => {
         </a>
       </motion.div>
 
-      {/* 🌫 Light aura pulse */}
+      {/* 💎 Soft Light Aura */}
       <motion.div
-        animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.08, 1] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+        animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.06, 1] }}
+        transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
         className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)]"
       />
-
-      {/* 👇 Keyframes for wave movement */}
-      <style>{`
-        @keyframes curtainWave {
-          0%, 100% { transform: translateX(0) scaleX(1); filter: brightness(1); }
-          50% { transform: translateX(5px) scaleX(1.02); filter: brightness(1.05); }
-        }
-        .animate-curtainWave {
-          animation: curtainWave 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };
