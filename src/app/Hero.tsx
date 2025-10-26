@@ -5,7 +5,7 @@ import React, { useState, useEffect, useCallback } from "react";
 // and a placeholder URL for compatibility.
 
 // Fallback image URL for use in a single-file environment
-const IMAGE_URL = "https://placehold.co/1920x1080/4c1d95/ffffff?text=B+Fashion+Studio";
+const IMAGE_URL = "https://i.pinimg.com/474x/f9/36/c1/f936c1ac2275f13d8dc375bb83bbaf2e.jpg";
 
 // --- Custom Web Audio Function for the 'Rattling' Blind Sound ---
 // This uses the Web Audio API to create a simple, browser-compatible sound effect
