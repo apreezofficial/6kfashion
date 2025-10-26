@@ -2,34 +2,68 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
-import Image from "next/image";
+// Image component is replaced with standard <img> for better self-containment in this environment.
 
 const galleryImages = [
-  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF4-1cJfBKZN3BQEcvbB-82fH5hCPDaJ9qdL5viAXB9w&s=10", alt: "Tailoring class" },
-  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj5H_2rsHkkG7vBiUclcuVNj89csy6nEZ5wtbg-dp5hg&s=10", alt: "Design session" },
-  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0eAB_xEnRB2TZBrtcX5LjwZUKiNcRMnX4mhjLKkKKvQ&s=10", alt: "Student creation" },
-  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKGXMghmOyYEQ1mkzp72h7njg7dlPX29TDSelClTd4aw&s=10", alt: "Fashion runway" },
-  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Mi4MT9Y9dcYJfrIovOqXFrcgkv5nCsBOB4cR2QFBiw&s=10", alt: "Workshop in progress" },
-  { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb70N8RTNFkjQ3y9HxU5g0c9iGgdv1xgu_RVoNGc5cPQ&s=10", alt: "Cutting and sewing" },
+  // Using high-contrast placeholders to match the BFA brand aesthetic
+  { src: "https://placehold.co/800x600/6B20AF/ffffff?text=Couture+Draping+Class", alt: "Couture Draping Class" },
+  { src: "https://placehold.co/800x1200/BD0D58/ffffff?text=Runway+Collection+Preview", alt: "Runway Collection Preview" },
+  { src: "https://placehold.co/800x600/6B20AF/ffffff?text=Digital+Fashion+Workshop", alt: "Digital Fashion Workshop" },
+  { src: "https://placehold.co/800x600/BD0D58/ffffff?text=Pattern+Drafting+Studio", alt: "Pattern Drafting Studio" },
+  { src: "https://placehold.co/800x1200/6B20AF/ffffff?text=Student+Final+Garment", alt: "Student Final Garment" },
+  { src: "https://placehold.co/800x600/BD0D58/ffffff?text=Textile+Innovation+Lab", alt: "Textile Innovation+Lab" },
+  { src: "https://placehold.co/800x600/6B20AF/ffffff?text=Mentor+Critique+Session", alt: "Mentor Critique Session" },
+  { src: "https://placehold.co/800x1200/BD0D58/ffffff?text=Fashion+Entrepreneurship", alt: "Fashion Entrepreneurship" },
+  { src: "https://placehold.co/800x600/6B20AF/ffffff?text=Haute+Couture+Embroidery", alt: "Haute Couture Embroidery" },
 ];
 
+const staggerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1, 
+    transition: { 
+      staggerChildren: 0.1 
+    } 
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 30 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
+};
+
 export default function GallerySection() {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState(null);
+
+  // --- Theme & Style Helpers (Literal Tailwind Class Names) ---
+  // Using direct class names to avoid dynamic string concatenation errors
+  const gridClasses = [
+    "md:col-span-1 md:row-span-2", // Tall
+    "md:col-span-2 md:row-span-1", // Wide
+    "md:col-span-1 md:row-span-1", // Square
+    "md:col-span-1 md:row-span-1", // Square
+    "md:col-span-2 md:row-span-2", // Large Square
+    "md:col-span-1 md:row-span-1", // Square
+    "md:col-span-1 md:row-span-1", // Square
+    "md:col-span-1 md:row-span-2", // Tall
+    "md:col-span-2 md:row-span-1", // Wide
+  ];
 
   return (
-    <section className="relative py-28 bg-gradient-to-b from-white via-blue-50 to-blue-100 overflow-hidden">
-      {/* ✨ Subtle blue glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+    <section 
+      id="gallery" 
+      className={`relative py-32 bg-gradient-to-b from-white via-violet-50 to-fuchsia-50 overflow-hidden`}
+    >
+      {/* 🌟 Section Heading */}
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-center text-blue-900 mb-6"
+          className={`text-5xl md:text-7xl font-black text-center text-violet-900 mb-4 uppercase tracking-tighter drop-shadow-lg`}
         >
-          Our <span className="text-blue-700">Creative Gallery</span>
+          The <span className={`text-fuchsia-600`}>Exhibition</span>
         </motion.h2>
 
         <motion.p
@@ -37,41 +71,55 @@ export default function GallerySection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center text-gray-600 max-w-2xl mx-auto mb-16"
+          className="text-xl text-gray-700 max-w-3xl mx-auto mb-20 font-light text-center"
         >
-          A glimpse into the creativity, craftsmanship, and innovation that define
-          <span className="text-blue-700 font-semibold"> Tim Fashion Academy.</span>  
-          Every creation tells a story — inspired, designed, and made by our talented students.
+          A curated view of craftsmanship, innovation, and style—creations inspired, designed, and launched by our talented students.
         </motion.p>
 
-        {/* 🖼️ Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {galleryImages.map((img, i) => (
+        {/* 🖼️ Gallery Grid (Dynamic Masonry) */}
+        <motion.div
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+        >
+          {galleryImages.slice(0, 9).map((img, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl"
+              variants={itemVariants}
+              className={`
+                relative group cursor-pointer overflow-hidden rounded-3xl shadow-xl 
+                transition-all duration-300 hover:shadow-2xl hover:shadow-fuchsia-600/50
+                ${gridClasses[i]} 
+                aspect-square md:aspect-auto
+              `}
               onClick={() => setSelected(img.src)}
             >
-              <Image
+              <img
                 src={img.src}
                 alt={img.alt}
-                width={500}
-                height={400}
-                className="object-cover w-full h-64 md:h-80 transition-transform duration-500 group-hover:scale-105"
+                // No width/height attributes needed since Tailwind handles sizing via classes
+                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-blue-700/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white font-semibold tracking-wide">
-                View Work
+              {/* Overlay with Gradient and Text */}
+              <div
+                className={`
+                  absolute inset-0 bg-gradient-to-t from-violet-900/80 to-transparent opacity-0 
+                  group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4 md:p-6
+                  border-4 border-transparent group-hover:border-fuchsia-600/70 rounded-3xl
+                `}
+              >
+                <div className="text-white text-lg font-bold tracking-wide leading-snug">
+                  {img.alt}
+                </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
-      {/* 🪄 Lightbox Preview */}
+      {/* 🪄 Lightbox Preview (Modal) */}
       <AnimatePresence>
         {selected && (
           <motion.div
@@ -79,7 +127,7 @@ export default function GallerySection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-blue-950/90 flex items-center justify-center p-4 backdrop-blur-sm"
+            className={`fixed inset-0 z-50 bg-violet-900/90 flex items-center justify-center p-4 backdrop-blur-sm`}
             onClick={() => setSelected(null)}
           >
             <motion.div
@@ -87,18 +135,16 @@ export default function GallerySection() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="relative max-w-3xl w-full"
+              className="relative max-w-4xl w-full"
             >
-              <Image
+              <img
                 src={selected}
                 alt="Gallery preview"
-                width={1000}
-                height={700}
-                className="rounded-xl object-cover w-full h-auto shadow-2xl border-4 border-blue-600/40"
+                className={`rounded-2xl object-cover w-full h-auto shadow-2xl border-4 border-fuchsia-600/40`}
               />
               <button
                 onClick={() => setSelected(null)}
-                className="absolute top-3 right-3 bg-blue-700/40 hover:bg-blue-700/60 text-white p-2 rounded-full backdrop-blur-md transition"
+                className={`absolute top-4 right-4 bg-fuchsia-600/40 hover:bg-fuchsia-600/70 text-white p-3 rounded-full backdrop-blur-md transition text-lg font-bold`}
               >
                 ✕
               </button>
@@ -108,5 +154,5 @@ export default function GallerySection() {
       </AnimatePresence>
     </section>
   );
-          }
+           }
         
