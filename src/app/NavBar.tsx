@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 const navLinks = [
-  { name: "Programs", href: "#programs" },
+  { name: "Programs", href: "/#programs" },
   { name: "Alumni Success", href: "alumni" },
-  { name: "Our Difference", href: "#difference" },
+  { name: "Our Difference", href: "/#difference" },
 ];
 
 const BFashionNavBar: React.FC = () => {
