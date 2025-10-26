@@ -32,7 +32,7 @@ const BFashionNavBar: React.FC = () => {
         <div className="flex justify-between items-center h-18 py-3">
           {/* Logo - B Fashion Academy */}
           <a
-            href="#hero"
+            href="/"
             className={`text-2xl md:text-3xl font-extrabold tracking-tighter ${PRIMARY_COLOR} hover:text-violet-900 transition-colors`}
           >
             B<span className={ACCENT_COLOR}>Fashion</span> Academy
