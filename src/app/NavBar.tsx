@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const navLinks = [
   { name: "Programs", href: "#programs" },
-  { name: "Alumni Success", href: "#alumni" },
+  { name: "Alumni Success", href: "alumni" },
   { name: "Our Difference", href: "#difference" },
 ];
 
