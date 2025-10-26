@@ -4,10 +4,10 @@ import React from "react";
 
 // Assuming your components are in a folder like 'app/components/'
 // Adjust the path '../components/' if your structure is different.
-import NavBar from "../components/NavBar";
-import AlumniShowcase from "../components/AlumniShowcase";
-import ContactSection from "../components/ContactSection";
-import Footer from "../components/Footer";
+import NavBar from "../NavBar";
+import AlumniShowcase from "../AlumniShowcase";
+import ContactSection from "../ContactSection";
+import Footer from "../Footer";
 
 /**
  * Alumni Showcase Page
