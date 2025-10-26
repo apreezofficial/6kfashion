@@ -1,91 +1,230 @@
 "use client";
-
-import React from "react";
-import Tilt from "react-parallax-tilt";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Scissors, Sparkles, Shirt, Palette } from "lucide-react";
 
-const features = [
+// --- Theme Constants ---
+const PRIMARY_TEXT = "text-violet-900";
+const ACCENT_COLOR = "text-fuchsia-600";
+const ACCENT_BG_LIGHT = "bg-fuchsia-50";
+const BUTTON_BG = "bg-fuchsia-700 hover:bg-fuchsia-800";
+
+// --- Program Data Structured by Category ---
+const programs = [
   {
-    icon: <Scissors className="w-10 h-10 text-blue-700" />,
-    title: "Precision Tailoring",
-    desc: "Learn the timeless art of cutting and stitching with unmatched finesse.",
-    color: "from-blue-100 to-blue-50",
+    category: "COUTURE & DESIGN",
+    items: [
+      {
+        title: "Advanced Couture Techniques",
+        duration: "12 Months",
+        focus: "High-end hand finishing, draping, and luxury fabric handling.",
+        icon: "👑",
+      },
+      {
+        title: "Digital Fashion Illustration",
+        duration: "3 Months",
+        focus: "Mastering Procreate & Adobe Fresco for modern fashion sketching.",
+        icon: "💻",
+      },
+      {
+        title: "Bridal Wear and Evening Gowns",
+        duration: "9 Months",
+        focus: "Specialization in structured garments, corsetry, and embroidery.",
+        icon: "💍",
+      },
+    ],
   },
   {
-    icon: <Sparkles className="w-10 h-10 text-yellow-600" />,
-    title: "Creative Design",
-    desc: "Unleash your imagination with sketches that come alive in fabric.",
-    color: "from-yellow-100 to-yellow-50",
+    category: "FASHION BUSINESS",
+    items: [
+      {
+        title: "Fashion Entrepreneurship 101",
+        duration: "6 Months",
+        focus: "Brand development, legal setup, and market penetration strategies.",
+        icon: "💼",
+      },
+      {
+        title: "E-commerce and Digital Marketing",
+        duration: "4 Months",
+        focus: "Shopify setup, SEO, and targeted social media campaign execution.",
+        icon: "📈",
+      },
+      {
+        title: "Supply Chain & Ethical Sourcing",
+        duration: "5 Months",
+        focus: "Sustainable practices, inventory management, and global logistics.",
+        icon: "🌍",
+      },
+    ],
   },
   {
-    icon: <Shirt className="w-10 h-10 text-pink-600" />,
-    title: "Modern Fashion",
-    desc: "Stay ahead of trends while mastering the craft that never fades.",
-    color: "from-pink-100 to-pink-50",
-  },
-  {
-    icon: <Palette className="w-10 h-10 text-purple-600" />,
-    title: "Color Mastery",
-    desc: "Blend tones and textures like an artist creating wearable stories.",
-    color: "from-purple-100 to-purple-50",
+    category: "TECHNICAL SKILLS",
+    items: [
+      {
+        title: "Master Pattern Drafting",
+        duration: "10 Months",
+        focus: "Precision flat pattern making for all garment types (menswear and womenswear).",
+        icon: "📐",
+      },
+      {
+        title: "Garment Construction & Tailoring",
+        duration: "8 Months",
+        focus: "Industrial machine operation, pocket setting, and tailored jacket creation.",
+        icon: "🧵",
+      },
+      {
+        title: "3D Digital Prototyping (CLO3D)",
+        duration: "4 Months",
+        focus: "Creating virtual samples and reducing development costs using 3D software.",
+        icon: "💿",
+      },
+    ],
   },
 ];
 
-const CraftSection = () => {
+const ProgramCatalog: React.FC = () => {
+  const [activeTab, setActiveTab] = useState(programs[0].category);
+  const activeProgramList = programs.find((p) => p.category === activeTab)?.items || [];
+
+  const containerVariants = {
+    hidden: { opacity: 0, transition: { staggerChildren: 0.05 } },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        when: "beforeChildren",
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
-    <section
-      id="craft"
-      className="relative py-24 bg-gradient-to-b from-white via-blue-50/30 to-white overflow-hidden"
-    >
+    <section id="programs" className={`py-20 md:py-32 px-6 md:px-12 ${ACCENT_BG_LIGHT} relative overflow-hidden`}>
+      {/* Decorative background shape */}
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-fuchsia-300/30 blur-3xl opacity-50 rounded-full"></div>
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-violet-300/30 blur-3xl opacity-50 rounded-full"></div>
+
+      {/* Section Header */}
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
+        initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-center mb-16"
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="text-center mb-16 relative z-10"
       >
-        <h2 className="text-4xl md:text-5xl font-extrabold text-blue-800 mb-4">
-          Our Craft in Motion
+        <h2 className={`text-4xl md:text-6xl font-extrabold ${PRIMARY_TEXT} mb-3`}>
+          Curriculum <span className={ACCENT_COLOR}>Tracks</span>
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Experience the soul of fashion through a fusion of tradition, design,
-          and innovation — where every stitch tells a story.
+        <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+          Explore our specialized programs designed to cultivate technical mastery, artistic vision, and business acumen.
         </p>
       </motion.div>
 
-      {/* 3D Tilt Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6 max-w-7xl mx-auto">
-        {features.map((item, i) => (
-          <Tilt
-            key={i}
-            tiltMaxAngleX={15}
-            tiltMaxAngleY={15}
-            perspective={1000}
-            transitionSpeed={800}
-            scale={1.05}
-            glareEnable={true}
-            glareMaxOpacity={0.25}
-            glareColor="white"
-            glarePosition="bottom"
-            className="rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br hover:shadow-2xl"
+      {/* Program Tabs/Segmented Control */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.7 }}
+        viewport={{ once: true }}
+        className="flex justify-center flex-wrap gap-4 mb-16 relative z-10"
+      >
+        {programs.map((p) => (
+          <button
+            key={p.category}
+            onClick={() => setActiveTab(p.category)}
+            className={`
+              py-3 px-6 rounded-full font-semibold transition-all duration-300
+              uppercase tracking-wide text-sm md:text-base shadow-lg
+              ${
+                activeTab === p.category
+                  ? `${BUTTON_BG} text-white transform scale-[1.05] ring-4 ring-fuchsia-300`
+                  : 'bg-white text-gray-600 hover:bg-fuchsia-100 hover:text-violet-800'
+              }
+            `}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2, duration: 0.7 }}
-              className={`flex flex-col items-center justify-center p-8 h-full bg-gradient-to-br ${item.color}`}
-            >
-              {item.icon}
-              <h3 className="mt-6 text-xl font-semibold text-gray-800">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 mt-3 text-center">{item.desc}</p>
-            </motion.div>
-          </Tilt>
+            {p.category}
+          </button>
         ))}
+      </motion.div>
+
+      {/* Program Cards Display */}
+      <motion.div
+        key={activeTab} // Key changes to trigger re-animation on tab switch
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10"
+      >
+        {activeProgramList.map((program, index) => (
+          <motion.div
+            key={index}
+            variants={itemVariants}
+            className={`
+              relative bg-white rounded-2xl p-8 shadow-xl border-t-4 border-fuchsia-400
+              overflow-hidden group cursor-pointer
+              transition-all duration-300 
+              hover:shadow-3xl hover:shadow-violet-500/50 hover:border-violet-600
+              transform hover:scale-[1.02]
+            `}
+          >
+            {/* Background Glow on Hover */}
+            <div className={`
+              absolute inset-0 z-0 opacity-0 group-hover:opacity-10 
+              bg-gradient-to-br from-fuchsia-200/50 to-violet-200/50 rounded-2xl
+              transition-opacity duration-500
+            `}></div>
+
+            <div className="relative z-10 space-y-4">
+              {/* Icon and Title */}
+              <div className="flex items-center space-x-4 mb-4">
+                <span className={`text-4xl p-2 rounded-lg ${ACCENT_COLOR} ${ACCENT_BG_LIGHT} border-2 border-fuchsia-300`}>
+                  {program.icon}
+                </span>
+                <h3 className={`text-2xl font-extrabold ${PRIMARY_TEXT} leading-snug`}>
+                  {program.title}
+                </h3>
+              </div>
+
+              {/* Details */}
+              <p className="text-gray-600 font-medium">{program.focus}</p>
+
+              {/* Duration Tag */}
+              <div className="pt-2">
+                <span className={`inline-block px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider 
+                bg-violet-100 ${ACCENT_COLOR} border border-violet-200`}>
+                  Duration: {program.duration}
+                </span>
+              </div>
+            </div>
+            
+            {/* Floating Arrow on Hover */}
+            <motion.div 
+                initial={{ x: -10, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="absolute right-6 top-8 text-3xl opacity-0 group-hover:opacity-100 text-fuchsia-600 transition-opacity"
+            >
+              &rarr;
+            </motion.div>
+          </motion.div>
+        ))}
+      </motion.div>
+      
+      {/* Final Call to Action */}
+      <div className="text-center mt-20">
+        <a
+          href="#contact"
+          className={`inline-flex items-center px-10 py-4 font-bold rounded-full text-white shadow-xl
+          ${BUTTON_BG} transition duration-300 transform hover:scale-[1.03] ring-2 ring-transparent hover:ring-fuchsia-400/50`}
+        >
+          View Full Curriculum Brochure (PDF)
+        </a>
       </div>
     </section>
   );
 };
 
-export default CraftSection;
+export default ProgramCatalog;
