@@ -14,45 +14,66 @@ export default function ContactSection() {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch("https://proforms.top/api/contact", {
+      // Updated to the requested endpoint
+      const res = await fetch("https://app.proforms.top/f/pr001", {
         method: "POST",
         body: formData,
       });
 
+      // Assuming success if status is 200-299
       if (res.ok) {
         setStatus("success");
         form.reset();
-      } else throw new Error("Submission failed");
-    } catch {
+      } else {
+        // Attempt to read error message if available
+        const errorText = await res.text();
+        console.error("Submission failed:", errorText);
+        throw new Error("Submission failed");
+      }
+    } catch (error) {
+      console.error("Contact Form Submission Error:", error);
       setStatus("error");
     }
+  };
+
+  const statusMessages = {
+    idle: "Send Message",
+    loading: "Sending...",
+    success: "Message Sent ✅",
+    error: "Failed ❌ Try Again",
   };
 
   return (
     <section
       id="contact"
-      className="relative bg-white py-24 text-blue-800 overflow-hidden"
+      className="relative bg-violet-950 py-24 md:py-32 text-white overflow-hidden"
     >
-      {/* Blue Glow Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-blue-100" />
+      {/* Dynamic Background Glow */}
+      <motion.div
+        animate={{ opacity: [0.3, 0.6, 0.3] }}
+        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(236,72,153,0.1)_0%,transparent_70%)] pointer-events-none"
+      />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-extrabold text-center mb-6"
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-extrabold text-center mb-6 drop-shadow-md"
         >
-          Contact <span className="text-blue-600">Tim Fashion Academy</span>
+          Begin Your <span className="text-fuchsia-400">Masterclass</span>
         </motion.h2>
 
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-center text-blue-500 mb-12 max-w-2xl mx-auto"
+          viewport={{ once: true }}
+          className="text-center text-violet-200 mb-16 max-w-2xl mx-auto text-lg"
         >
-          Got questions, inquiries, or partnership ideas? We’d love to hear from you.
+          Got questions about our programs, admissions, or masterclasses? Reach out to our dedicated team.
         </motion.p>
 
         <motion.form
@@ -60,63 +81,73 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="bg-white shadow-xl rounded-2xl p-8 md:p-10 max-w-3xl mx-auto border border-blue-100"
+          viewport={{ once: true }}
+          className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 max-w-3xl mx-auto shadow-2xl shadow-fuchsia-400/40 border-t-4 border-fuchsia-500/50"
         >
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-blue-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-semibold text-violet-800 mb-2">
                 Full Name
               </label>
               <input
                 type="text"
+                id="name"
                 name="name"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-violet-200 bg-violet-50/50 text-violet-900 
+                  focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none transition-all duration-300"
                 placeholder="John Doe"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-blue-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-semibold text-violet-800 mb-2">
                 Email Address
               </label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-violet-200 bg-violet-50/50 text-violet-900 
+                  focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none transition-all duration-300"
                 placeholder="you@example.com"
               />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-blue-700 mb-2">
-                Message
+              <label htmlFor="message" className="block text-sm font-semibold text-violet-800 mb-2">
+                Your Inquiry
               </label>
               <textarea
+                id="message"
                 name="message"
                 required
                 rows={5}
-                className="w-full px-4 py-3 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
-                placeholder="Write your message..."
+                className="w-full px-4 py-3 rounded-xl border border-violet-200 bg-violet-50/50 text-violet-900 
+                  focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none resize-none transition-all duration-300"
+                placeholder="I am interested in the Couture Masterclass..."
               ></textarea>
             </div>
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-10">
             <motion.button
+              type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               disabled={status === "loading"}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-10 rounded-full transition-all duration-300"
+              className={`font-black text-white py-4 px-12 rounded-full transition-all duration-300 uppercase tracking-wider text-lg
+                ${status === "loading" 
+                  ? "bg-gray-500 cursor-not-allowed" 
+                  : status === "success"
+                  ? "bg-green-600 shadow-lg shadow-green-400/50"
+                  : status === "error"
+                  ? "bg-red-600 shadow-lg shadow-red-400/50"
+                  : "bg-gradient-to-r from-fuchsia-600 to-violet-600 shadow-xl shadow-fuchsia-400/50 hover:from-fuchsia-700 hover:to-violet-700"
+                }`}
             >
-              {status === "loading"
-                ? "Sending..."
-                : status === "success"
-                ? "Message Sent ✅"
-                : status === "error"
-                ? "Failed ❌ Try Again"
-                : "Send Message"}
+              {statusMessages[status]}
             </motion.button>
           </div>
         </motion.form>
