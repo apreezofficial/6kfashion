@@ -19,7 +19,7 @@ export default function AlumniPage() {
   return (
     <main className="flex min-h-screen flex-col bg-black">
       {/* Main Navigation */}
-      <BFashionNavBar />
+      <NavBar />
 
       {/* Page Content */}
       <div className="flex-grow">
